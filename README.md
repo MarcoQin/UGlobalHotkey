@@ -11,15 +11,25 @@ It is written by [bakwc](https://github.com/bakwc), extracted from [Pastexen](ht
 qmake  
 make
 ```
+* This will build shared library in source directory, like libUGlobalHotkey.dylib or something else.
 
 ### Usage example  
 ``` 
 UGlobalHotkeys *hotkeyManager = new UGlobalHotkeys(); 
-hotkeyManager->RegisterHotkey("Ctrl+Shift+F12");
-connect(hotkeyManager, &UGlobalHotkeys::Activated, [=](size_t id)
+hotkeyManager->registerHotkey("Ctrl+Shift+F12");
+connect(hotkeyManager, &UGlobalHotkeys::activated, [=](size_t id)
 {
     qDebug() << "Activated: " << QString::number(id);
 });
+```
+You need add something to your xxx.pro file, for example:
+```
+LIBS += -L/Path/To/UGlobalHotkey -lUGlobalHotkey
+INCLUDEPATH += /Path/To/UGlobalHotkey
+```
+Then you can use this library now:
+```
+#include "uglobalhotkeys.h"
 ```
 
 ### License  
